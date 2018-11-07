@@ -11,6 +11,6 @@ import getters from "./getters"
 export default new Vuex.Store({
   state,
   mutations,
-  actions,
-  getters
+  getters,
+  actions
 })

@@ -17,18 +17,13 @@ const init = mysql.createConnection(db)
 init.connect()
 init.query('CREATE DATABASE ct_blog',err=>{
     Object.assign(db,dbName)
-    //第二次连接数据库，这时候，数据库ct_blog已经创建成功了，这时候，直接连接ct_blog数据库
-    //然后执行sql文件夹下的ct_blog.sql文件，对应的表和测试数据就已经存在数据库里面了
     pool = mysql.createPool(db)
     if(err){
-        console.log(err)
-        console.log('ct_blog database created already')
+        console.log("数据库已存在")
     }else{
-        console.log('create ct_blog Database')
-        query(sqlContent).then(red=>{
-            console.log('import sql is success')
+        query(sqlContent).then(res=>{
+            console.log('数据库创建成功')
         }).catch(err=>{
-            console.log('import sql is error')
             console.log(err)
         })
     }

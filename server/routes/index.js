@@ -1,6 +1,8 @@
 import Router from 'koa-router'
 import UserController from '../Controller/UserController'
 import {base_API} from "../config";
+import checkToken from '../utils/checkToken'
+
 const router = new Router()
 
 router.get('/',async ctx=>{
@@ -11,4 +13,6 @@ router.get('/',async ctx=>{
 router.prefix(`${base_API}`)
 //登录
 router.post('/login',UserController.login)
+//退出
+router.get('/logout',checkToken,UserController.logout)
 export default router

@@ -46,12 +46,14 @@ class UserController {
                 message:'用户不存在，请重新填写.....'
             }
         }
-
         //生成token
-
         //最后返回token
-
-
+    }
+    async logout(ctx){
+        ctx.body = {
+            success:true,
+            message:'退出成功'
+        }
     }
 }
 

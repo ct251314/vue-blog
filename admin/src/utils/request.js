@@ -1,6 +1,6 @@
 import axios from 'axios'
 import store from '@/store'
-import { getToken } from '@/utils/auth'
+import { getToken,removeToken } from '@/utils/auth'
 
 // 创建axios实例
 const service = axios.create({
@@ -28,7 +28,20 @@ service.interceptors.response.use(
   response =>{
     const res = response.data
     //这里面可以设置自定义的返回错误
-    return response.data
+    if(res.code == 401){
+      //token已过期的状态码
+      /*this.$notify({
+        type:'error',
+        title:'TOKEN',
+        text:'已过期，请重新登录....'
+      })*/
+      alert('token已过期')
+      removeToken();
+      store.commit('SET_TOKEN','')
+      location.reload()
+    }else{
+      return response.data
+    }
   },
   error => {
     console.log('err' + error) // for debug
